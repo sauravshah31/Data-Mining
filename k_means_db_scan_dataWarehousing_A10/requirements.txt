@@ -1,0 +1,7 @@
+antiorm==1.2.1
+db==0.1.1
+db-sqlite3==0.0.1
+numpy==1.19.4
+pip==20.2.3
+setuptools==50.3.0
+wheel==0.35.1

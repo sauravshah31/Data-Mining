@@ -1,0 +1,99 @@
+CREATING DATACUBE
+--------------------------------------------------
+CREATING TABLES
+------------------------------------
+EXECUTING QUERY
+CREATE TABLE student(ID TEXT PRIMARY KEY ,NAME TEXT NOT NULL );
+EXECUTING QUERY
+CREATE TABLE faculty(ID TEXT PRIMARY KEY ,NAME TEXT NOT NULL );
+EXECUTING QUERY
+CREATE TABLE course(ID TEXT PRIMARY KEY ,NAME TEXT NOT NULL );
+EXECUTING QUERY
+CREATE TABLE fact(SID TEXT ,FID TEXT ,CID TEXT ,GRADE INTEGER ,FOREIGN KEY (SID) REFERENCES student(ID) ,FOREIGN KEY (FID) REFERENCES course(ID) ,FOREIGN KEY (CID) REFERENCES faculty(ID) );
+
+INSERTING DATA INTO TABLES
+------------------------------------
+EXECUTING QUERY
+INSERT INTO student(ID,NAME) VALUES ('S1','Hary');
+EXECUTING QUERY
+INSERT INTO student(ID,NAME) VALUES ('S2','Alica');
+EXECUTING QUERY
+INSERT INTO faculty(ID,NAME) VALUES ('F1','SK');
+EXECUTING QUERY
+INSERT INTO faculty(ID,NAME) VALUES ('F2','TK');
+EXECUTING QUERY
+INSERT INTO course(ID,NAME) VALUES ('C1','Science');
+EXECUTING QUERY
+INSERT INTO course(ID,NAME) VALUES ('C2','History');
+EXECUTING QUERY
+INSERT INTO course(ID,NAME) VALUES ('C3','Fine Arts');
+EXECUTING QUERY
+INSERT INTO fact(SID,FID,CID,GRADE) VALUES ('S1','F1','C1',9);
+EXECUTING QUERY
+INSERT INTO fact(SID,FID,CID,GRADE) VALUES ('S1','F2','C2',10);
+EXECUTING QUERY
+INSERT INTO fact(SID,FID,CID,GRADE) VALUES ('S1','F1','C3',8);
+EXECUTING QUERY
+INSERT INTO fact(SID,FID,CID,GRADE) VALUES ('S2','F1','C1',10);
+EXECUTING QUERY
+INSERT INTO fact(SID,FID,CID,GRADE) VALUES ('S2','F2','C2',8);
+EXECUTING QUERY
+INSERT INTO fact(SID,FID,CID,GRADE) VALUES ('S2','F1','C3',9);
+
+
+DATACUBE CREATED IS
+--------------------------------------------------
+*******STAR SCHEMA********
+Fact Table
+SID	FID	CID	GRADE
+----------------------------------------
+S1	F1	C1	9
+S1	F2	C2	10
+S1	F1	C3	8
+S2	F1	C1	10
+S2	F2	C2	8
+S2	F1	C3	9
+
+Dimension Tables
+Table : student
+ID	NAME
+----------------------------------------
+S1	Hary
+S2	Alica
+
+Table : faculty
+ID	NAME
+----------------------------------------
+F1	SK
+F2	TK
+
+Table : course
+ID	NAME
+----------------------------------------
+C1	Science
+C2	History
+C3	Fine Arts
+
+
+
+DATACUBE (ROLLUP)
+--------------------------------------------------
+Average grade of students on all subjects
+------------------------------------
+SID	NAME	OVERALL_GRADE
+S1	Hary	9.0
+S2	Alica	9.0
+
+Average grade awarded by faculty
+------------------------------------
+FID	FACULTY	CID	COURSE		AVERAGE_GRADE_AWARDED
+F1	SK	C1	Science		9.5
+F2	TK	C2	History		9.0
+F1	SK	C3	Fine Arts		8.5
+
+Average grade (SUBJECT WISE)
+------------------------------------
+CID	NAME		AVERAGE_GRADE
+C1	Science		9.5
+C2	History		9.0
+C3	Fine Arts		8.5

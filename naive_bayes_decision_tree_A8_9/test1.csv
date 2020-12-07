@@ -1,0 +1,4 @@
+age,income,student,credit_rating,class:buy_computer
+senior,low,no,fair,no
+youth,low,yes,excellent,yes
+middle_aged,low,yes,fair,yes
